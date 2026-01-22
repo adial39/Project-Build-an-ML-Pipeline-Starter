@@ -38,6 +38,21 @@ def go(config: DictConfig):
         if "download" in active_steps:
             # Download file and load in W&B
             _ = mlflow.run(
+                f"{config['main']['components_repository']}/basic_cleaning",
+                "main",
+                env_manager="conda",
+                parameters={
+                    "input_artifact": "sample.csv:latest",
+                    "output_artifact": config["etl"]["clean_data_artifact"],
+                    "output_type": "cleaned_data",
+                    "output_description": "Data after basic cleaning",
+                    "min_price": config["etl"]["min_price"],
+                    "max_price": config["etl"]["max_price"],
+                },
+            )
+
+            """
+            _ = mlflow.run(
                 f"{config['main']['components_repository']}/get_data",
                 "main",
                 env_manager="conda",
@@ -48,7 +63,7 @@ def go(config: DictConfig):
                     "artifact_description": "Raw file as downloaded"
                 },
             )
-
+            """
         if "basic_cleaning" in active_steps:
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/basic_cleaning",
