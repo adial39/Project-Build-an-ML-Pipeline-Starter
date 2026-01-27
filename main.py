@@ -65,6 +65,10 @@ def go(config: DictConfig):
             )
             """
         if "basic_cleaning" in active_steps:
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
+
             
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/basic_cleaning",
@@ -85,6 +89,9 @@ def go(config: DictConfig):
             #pass
 
         if "data_check" in active_steps:
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
             
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/data_check",
@@ -100,12 +107,33 @@ def go(config: DictConfig):
             )
         """
         if "data_check" in active_steps:
+        
             ##################
             # Implement here #
             ##################
             pass
         """
-        if "data_split" in active_steps:     
+        if "data_split" in active_steps:
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
+            """
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
+            _ = mlflow.run(
+                component_path,
+                "main",
+                env_manager="conda",
+                parameters={
+                    "input": "clean_sample.csv:latest",
+                    "test_size": config["modeling"]["test_size"],
+                    "random_seed": config["modeling"]["random_seed"],
+                    "stratify_by": config["modeling"]["stratify_by"],
+                },
+            )
+
+            """
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/train_val_test_split",
                 "main",
@@ -126,6 +154,9 @@ def go(config: DictConfig):
             #pass
 
         if "train_random_forest" in active_steps:
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
 
             # NOTE: we need to serialize the random forest configuration into JSON
             rf_config = os.path.abspath("rf_config.json")
@@ -157,6 +188,9 @@ def go(config: DictConfig):
 
 
         if "test_regression_model" in active_steps:
+            component_path = os.path.abspath(
+        os.path.join(config['main']['components_repository'], "train_val_test_split")
+    )
             
 
             ##################
