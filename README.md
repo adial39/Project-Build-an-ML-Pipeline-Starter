@@ -1,5 +1,4 @@
-[![Weights & Biases Project Page](https://wandb.ai)]([
-](https://wandb.ai/adial39-western-governors-university/nyc_airbnb/artifacts/cleaned_data/clean_sample.csv/v0)
+Check out my W&B project [here](https://wandb.ai/adial39-western-governors-university/nyc_airbnb/artifacts/cleaned_data/clean_sample.csv/v0).
 
 
 # Build an ML Pipeline for Short-Term Rental Prices in NYC
