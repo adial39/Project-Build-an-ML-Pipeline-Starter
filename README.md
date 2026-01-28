@@ -202,9 +202,9 @@ To work with Jupyter Notebooks, you need first to run the following command in t
 ow we transfer what we have done in EDA to a new "basic cleaning" step that cleans the sample.csvartifact and creates a new clean_sample.csv with the cleaned data.
 Go to src/basic_cleaning, containing the files required for an MLflow step:
 
-    -    conda.yml: conda environment for the step
-    -    MLproject: parameters and definitions of the step
-    -     run.py: script of the step
+- conda.yml: conda environment for the step
+- MLproject: parameters and definitions of the step
+- run.py: script of the step
     
 Understand Arguments in MLproject
 
