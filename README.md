@@ -210,12 +210,12 @@ Understand Arguments in MLproject
 
 Check the arguments stored in the src/basic_cleaning/MLproject. These are the arguments passed to the basic_cleaning step.
 
-  - •    input_artifact: the input artifact
-  - •    output_artifact: the name for the output artifact
-  - •    output_type: the type for the output artifact
-  - •    output_description: a description of the output artifact
-  - •    min_price: the minimum price to consider
-  - •    max_price: the maximum price to consider
+- input_artifact: the input artifact
+- output_artifact: the name for the output artifact
+- output_type: the type for the output artifact
+- output_description: a description of the output artifact
+- min_price: the minimum price to consider
+- max_price: the maximum price to consider
     
 All parameters should be of type str except min_price and max_price which should be float.
 Add Arguments Information in run.py
@@ -229,10 +229,10 @@ After the cleaning, it is a good practice to put some tests that verify that the
 Create a Reference Dataset
 One of our tests will compare the distribution of the current data sample with a reference, to ensure that there is no unexpected change. Therefore, we first need to define a "reference dataset". We will just tag the latest clean_sample.csv artifact on W&B as our reference dataset.
 
-    - 1    Go to https://wandb.ai/home(opens in a new tab) in your web browser.
-    - 2    Navigate to your project, then to the artifact tab.
-    - 3    Click on "clean_sample", then on the version with the latest alias. This is the last one we produced in the previous basic cleaning step.
-    - 4    Add a tag reference to it by clicking the "+" in the Aliases section on the right.
+- Go to https://wandb.ai/home(opens in a new tab) in your web browser.
+- Navigate to your project, then to the artifact tab.
+- Click on "clean_sample", then on the version with the latest alias. This is the last one we produced in the previous basic cleaning step.
+- Add a tag reference to it by clicking the "+" in the Aliases section on the right.
 
 
 <img width="867" height="435" alt="wandb-tag-data-test" src="https://github.com/user-attachments/assets/76960742-8720-44a0-9c81-f49da77000e6" />
@@ -243,8 +243,8 @@ Create Tests
 
 Now we are ready to add some tests. In the starter kit, you can find a src/data_check step that you need to complete two tests.
 
-    - •    test_row_count
-    - •    test_price_range
+- test_row_count
+- test_price_range
     
 Note the following comment in the src/data_check/test_data.py. That is where you add the tests.
 
@@ -274,8 +274,8 @@ Add the Step to the Pipeline
 Now add the data_check step to the main.pyfile, so that it gets executed as part of our pipeline.
 
 Hint:
-   - 1    Check the basic_cleaning step you implemented before as an example. The implementation is very similar.
-   - 2    Check the src/data_check/MLproject for required arguments
+- Check the basic_cleaning step you implemented before as an example. The implementation is very similar.
+- Check the src/data_check/MLproject for required arguments
     
 Use clean_sample.csv:latest as csv and clean_sample.csv:reference as ref. Right now, they point to the same file, but later on, they will not: we will fetch another sample of data and therefore the latest tag will point to that.
 Also, use the value stored in config.yaml for the other parameters. For example, use config["data_check"]["kl_threshold"] for the kl_threshold parameter.
@@ -305,8 +305,8 @@ test_data.py::test_price_range PASSED                    [10
 
 Now the data is cleaned and checked. It's time to train the model. In this section, you will work in the following files and folders:
 
-    - •    components/train_val_test_split: splitting data into training and test dataset
-    - •    src/train_random_forest: construct pipelines to train a model and make inferences on the model
+- components/train_val_test_split: splitting data into training and test dataset
+- src/train_random_forest: construct pipelines to train a model and make inferences on the model
     
 You will complete the code for these two steps and add them to the ML pipeline.
 
@@ -352,11 +352,11 @@ If you go to W&B, you will see a new artifact type TEST_DATA and within it the t
 Complete run.py
 Read the script src/train_random_forest/run.py carefully and complete the following missing pieces.
 
-    - •    Build a preprocessing pipeline that imputes missing values and encodes the variable
-    - •    Build the inference pipeline called "sk_pipe"
-    - •    Fit the "sk_pipe" pipeline
-    - •    Save the "sk_pipe" pipeline
-    - •    Save model metrics MAE and R2
+- Build a preprocessing pipeline that imputes missing values and encodes the variable
+- Build the inference pipeline called "sk_pipe"
+- Fit the "sk_pipe" pipeline
+- Save the "sk_pipe" pipeline
+- Save model metrics MAE and R2
     
 All the places where you need to insert code are marked by a # YOUR CODE HERE comment and are delimited by two signs
 like "######################################". For example:
@@ -376,11 +376,11 @@ Once you are done, add this step to main.py under the train_random_forest step. 
 
 Hints:
 
-    - 1    The implementation should be similar to basic_cleaning and data_check steps.
-    - 2    Use trainval_data.csv:latest as trainval_artifact.
-    - 3    Use the name random_forest_export as output_artifact.
-    - 4    The main.py already provides a variable rf_config to be passed as the rf_configparameter.
-    - 5    Check the modeling section in config.yamlfor the other parameters.
+- The implementation should be similar to basic_cleaning and data_check steps.
+- Use trainval_data.csv:latest as trainval_artifact.
+- Use the name random_forest_export as output_artifact.
+- The main.py already provides a variable rf_config to be passed as the rf_configparameter.
+- Check the modeling section in config.yamlfor the other parameters.
     
 Run the Step with Hyperparameter Optimization
 
